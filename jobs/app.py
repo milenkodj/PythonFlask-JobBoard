@@ -1,7 +1,7 @@
 import sqlite3
 from flask import Flask, render_template, g
 
-PATH = 'db.sqlite'
+PATH = 'db/jobs.sqlite'
 
 app = Flask(__name__)
 
@@ -27,7 +27,7 @@ def execute_sql(sql, values=(), commit=False, single=False):
 def close_connection(exception):
     connection = getattr(g, '_connection', None)
     if connection is not None:
-        connection.close();
+        connection.close()
 
 @app.route('/')
 @app.route('/jobs')
