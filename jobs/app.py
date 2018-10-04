@@ -14,7 +14,7 @@ def open_connection():
 
 def execute_sql(sql, values=(), commit=False, single=False):
     connection = open_connection()
-    cursor = conection.execute_sql(sql, values)
+    cursor = connection.execute(sql, values)
     if commit == True:
         results = connection.commit()
     else:
@@ -24,7 +24,7 @@ def execute_sql(sql, values=(), commit=False, single=False):
     return results
 
 @app.teardown_appcontext
-def close_connection():
+def close_connection(exception):
     connection = getattr(g, '_connection', None)
     if connection is not None:
         connection.close();
